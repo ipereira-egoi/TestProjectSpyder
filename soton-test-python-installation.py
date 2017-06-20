@@ -37,7 +37,7 @@ def test_numpy():
     # Simple test
     a = np.arange(0, 100, 1)
     assert np.sum(a) == sum(a)
-    print("Testing numpy...      -> numpy OK")
+    print("Testing numpy...      -> numpy {} OK".format(np.version.version))
 
 
 def test_scipy():
@@ -49,7 +49,7 @@ def test_scipy():
     # Simple test
     import scipy.integrate
     assert abs(scipy.integrate.quad(lambda x: x * x, 0, 6)[0] - 72.0) < 1e-6
-    print("Testing scipy ...     -> scipy OK")
+    print("Testing scipy ...     -> scipy {} OK".format(scipy.__version__))
 
 
 def test_pylab():
@@ -102,6 +102,15 @@ def test_pytest():
     print("Testing pytest        -> pytest OK")
 
 
+def test_sklearn():
+    try:
+        import sklearn
+    except ImportError:
+        print("Could not import 'sklearn' -> fail")
+        return None
+    print("Testing scikit-learn  -> sklearn {} OK".format(sklearn.__version__))
+
+
 if __name__ == "__main__":
 
     print("Running using Python {}".format(sys.version))
@@ -111,3 +120,4 @@ if __name__ == "__main__":
     test_pylab()
     test_sympy()
     test_pytest()
+    test_sklearn()
